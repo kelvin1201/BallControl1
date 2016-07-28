@@ -1,0 +1,258 @@
+int x =50;
+float angle = 0;
+int y =250;
+float x1;
+float y1;
+float easing = 0.05;
+boolean drawT = false;
+
+void setup() {
+  size(500, 500);
+}
+
+void draw() {
+ 
+  circle0();
+  circle1();
+  circle();
+  linemove();
+  //rectangel();
+  easingball();
+  rectangel1();
+  midrect();
+  foursquare();
+  //MB1();
+  MB2();
+  MB3();
+  Keydata();
+  Keydata1();
+  halo();
+  pressA();
+  keytekan();
+  keyangle();
+  rectmove();
+  clickT();
+}
+
+void easingball() {
+  noStroke();  
+  fill(0);
+  float targetX = mouseX;
+  float dx = targetX - x1;
+  x1 += dx * easing;
+
+  float targetY = mouseY;
+  float dy = targetY - y1;
+  y1 += dy * easing;
+
+  ellipse(x1, y1, 20, 20);
+}
+
+void circle0() {
+  noStroke();
+  background(126);
+  fill(180);
+  ellipse(mouseX, mouseY, 33, 33);
+  ellipse(mouseX-20, 460, 33, 33); 
+  ellipse(mouseX+20, 250, 33, 33);
+  ellipse(mouseX, 16, 33, 33);
+}
+
+void circle1() {
+  noStroke();
+  ellipse(mouseX, 16, 33, 33);  
+  ellipse(mouseX/2, 50, 33, 33); 
+  ellipse(mouseX*2, 84, 33, 33);
+}
+
+void linemove() {
+  stroke(0);
+  println(pmouseX - mouseX);
+  strokeWeight(8);
+  line(mouseX, mouseY, pmouseX, pmouseY);
+}
+
+void circle() {
+  noStroke();
+  float x = mouseX;
+  float y = mouseY;
+  float ix = width - mouseX; 
+  float iy = height - mouseY; 
+  fill(255, 150);
+  ellipse(x, height/2, y, y);
+  fill(0, 159);
+  ellipse(ix, height/2, iy, iy);
+}
+
+void rectangel() {
+  fill(0);
+  noStroke();
+  if (mouseX < 250) {
+    rect(0, 0, 250, 500);
+  } else {
+    rect(250, 0, 250, 500);
+  }
+}
+void rectangel1() {
+  noStroke();
+  fill(0, 100);
+  if (mouseX < 166) {
+    rect(0, 0, 166, 500);
+  } else if (mouseX <332 ) {
+    rect(166, 0, 166, 500);
+  } else {
+    rect(332, 0, 166, 500);
+  }
+}
+
+void midrect() {
+  if ((mouseX > 62) && (mouseX < 437) &&
+    (mouseY > 62) && (mouseY < 437)) {
+    fill(255, 50);
+  } else {
+    fill(0, 50);
+  }
+  rect(62, 62, 375, 375);
+}
+
+void foursquare() {
+  noStroke();
+  fill(0, 100);
+  if ((mouseX <= 250) && (mouseY <= 250)) {
+    rect(0, 0, 250, 250);
+  } else if ((mouseX <= 250) && (mouseY > 250)) {
+    rect(0, 250, 250, 250);
+  } else if ((mouseX > 250) && (mouseY <= 250)) {
+    rect(250, 0, 250, 250);
+  } else {
+    rect(250, 250, 250, 250);
+  }
+}
+
+void MB1() {
+  noStroke();
+  if (mousePressed == true) {
+    fill(255, 50); // White
+  } else {
+    fill(0, 100); // Black
+  }
+  rect(height/4, width/4, 250, 250);
+}
+
+void MB2() {
+  noStroke();
+  if (mouseButton == LEFT) {
+    fill(0);
+  } else if (mouseButton == RIGHT) {
+    fill(255);
+  } else { 
+    fill(126, 50);
+  }
+  rect(height/4, width/4, 250, 250);
+}
+
+void MB3() {
+  noStroke();
+  if (mousePressed == true) {
+    if (mouseButton == LEFT) {
+      fill(255);
+    } else if (mouseButton == RIGHT) { 
+      fill(0);
+    }
+  } else {
+    fill(50, 50);
+  }
+  rect(height/3, width/3, 500/3, 500/3);
+}
+
+void Keydata() {
+  strokeWeight(5);
+  stroke(0);
+  if (keyPressed == true) { 
+    line(50, 50, 450, 450); 
+    line(50, 450, 450, 50);
+  } else { 
+    rect(height/2.5, width/2.5, 250/2.5, 250/2.5);
+  }
+}
+
+void Keydata1() {
+  strokeWeight(4);
+  stroke(0);
+  if (keyPressed == true) { 
+    x++;
+  } 
+  line(x, 50, x-400, 450);
+  line(x-400, 50, x, 450);
+  if (x>1000) {
+    x=0;
+  }
+}
+void halo() {
+  noStroke();
+  fill(0);
+  textSize(100);
+  text(key, 220, height/3);
+}
+
+void pressA() {
+  strokeWeight(4);
+  stroke(0);
+  fill(127, 50);
+  if ((keyPressed == true) && (key == 'A')||(key == 'a')) {
+    line(250, 50, 250, 450);
+  } else { // Otherwise, draw an ellipse
+    ellipse(250, 250, 250, 250);
+  }
+}
+
+void keytekan() {
+  stroke(0);
+  if (keyPressed == true) {
+    int x = key-32;
+    line(x, 0, x, height);
+  }
+}
+
+void keyangle() {
+  fill(0);
+  if (keyPressed == true) {
+    if ((key >= 32) && (key <= 126)) {
+      angle = (key - 32) * 3;
+    }
+  }
+  arc(250, 250, 66, 66, 0, radians(angle));
+}
+
+void rectmove() {
+  line(50, 250, 450, 250);
+  if (key == CODED) { 
+    if (keyCode == UP) {
+      y = 150;
+    } else if (keyCode == DOWN) {
+      y = 250;
+    }
+  } else {
+    y = 200;
+  }
+  fill(255, 150);
+  rect(125, y, 250, 100);
+}
+
+void clickT() {
+  noStroke();
+  fill(255);
+  if (drawT == true) {
+    rect(168, 20, 160, 20);
+    rect(239, 40, 22, 120);
+  }
+}
+
+void keyPressed() {
+  if ((key == 'T') || (key == 't')) {
+    drawT = true;
+  }
+}
+void keyReleased() {
+  drawT = false;
+}
